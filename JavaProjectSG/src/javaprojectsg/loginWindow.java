@@ -33,7 +33,7 @@ public class loginWindow extends javax.swing.JFrame {
         try {
             String dburl= "jdbc:mysql://localhost:3306/shoppingguide?zeroDateTimeBehavior=convertToNull";
 	    String user="root";
-	    String pass="Sarang@123";
+	    String pass="root";
 	    con=DriverManager.getConnection(dburl,user,pass);
             
             return con;
@@ -71,8 +71,8 @@ public class loginWindow extends javax.swing.JFrame {
                                  ps.setDouble(1, Double.parseDouble(budget.getText()));
                                  ps.setString(2, username.getText());
                                  ps.executeUpdate();
-                                 JOptionPane.showMessageDialog(null,"Login successfull");
                                  
+                                 JOptionPane.showMessageDialog(null, "Login successful");
                                  return true;
                              }catch(Exception e){
                                  JOptionPane.showMessageDialog(null, e.getMessage());
@@ -284,9 +284,9 @@ public class loginWindow extends javax.swing.JFrame {
             
                 if(checkLogin()){
                     
-                    mainWindow mainwindow=new mainWindow();
+                    mainWindow mw=new mainWindow();
                     this.dispose();
-                    mainwindow.setVisible(true);
+                    mw.setVisible(true);
                 };
 
 	    
