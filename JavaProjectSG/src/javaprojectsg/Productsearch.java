@@ -179,6 +179,11 @@ public class Productsearch extends javax.swing.JFrame {
         });
 
         next.setText("Next-->");
+        next.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -263,6 +268,12 @@ public class Productsearch extends javax.swing.JFrame {
                    mainWindow mr=new mainWindow();
                    mr.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_backActionPerformed
+
+    private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
+                this.dispose();
+                brands b=new brands();
+                b.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_nextActionPerformed
 
     /**
      * @param args the command line arguments
