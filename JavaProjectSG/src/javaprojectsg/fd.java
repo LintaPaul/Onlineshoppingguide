@@ -81,7 +81,7 @@ public class fd extends javax.swing.JFrame {
         try {
             String dburl= "jdbc:mysql://localhost:3306/shoppingguide?zeroDateTimeBehavior=convertToNull";
 	    String user="root";
-	    String pass="abcd.1234";
+	    String pass="root";
 	    con=DriverManager.getConnection(dburl,user,pass);
             String query="insert into feedbacks(fdbk) values(?)";
             PreparedStatement pst= con.prepareStatement(query);
