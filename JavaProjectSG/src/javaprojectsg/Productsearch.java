@@ -45,18 +45,17 @@ public class Productsearch extends javax.swing.JFrame {
         ArrayList<Product> productsList=new ArrayList<Product> ();
         
         Statement st;
-        ResultSet rs;
+        
         try{
             Connection con= getConnection();
             st=con.createStatement();
             String query="select * from products where prname='"+ValtoSearch+"'";
             
-            rs=st.executeQuery(query);
+           ResultSet rs=st.executeQuery(query);
             Product pr;
-            if(rs.next()==false)
-            {
-                JOptionPane.showMessageDialog(null,"Product not available");
-            }
+            
+               
+            
             while(rs.next()){
                 pr=new Product(
                                 rs.getString("prname"),
@@ -68,8 +67,11 @@ public class Productsearch extends javax.swing.JFrame {
              productsList.add(pr);   
                    
             }
+            
+            
         }
-        catch(Exception ex){
+        catch(SQLException ex){
+            
              System.out.println(ex.getMessage());
         }
         return productsList;
@@ -109,6 +111,8 @@ public class Productsearch extends javax.swing.JFrame {
         label1 = new java.awt.Label();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        back = new javax.swing.JButton();
+        next = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -167,6 +171,15 @@ public class Productsearch extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        back.setText("<--Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
+
+        next.setText("Next-->");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -186,18 +199,30 @@ public class Productsearch extends javax.swing.JFrame {
                                 .addGap(212, 212, 212))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(358, 358, 358)
-                        .addComponent(jButton1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(301, 301, 301)
-                        .addComponent(jLabel1)))
+                        .addComponent(jButton1)))
                 .addContainerGap(275, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(back)
+                .addGap(182, 182, 182)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(next)
+                .addGap(69, 69, 69))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jLabel1)
-                .addGap(74, 74, 74)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(next)
+                            .addComponent(back))))
+                .addGap(83, 83, 83)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -232,6 +257,12 @@ public class Productsearch extends javax.swing.JFrame {
                  
              // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+                   this.dispose();
+                   mainWindow mr=new mainWindow();
+                   mr.setVisible(true);// TODO add your handling code here:
+    }//GEN-LAST:event_backActionPerformed
 
     /**
      * @param args the command line arguments
@@ -269,6 +300,7 @@ public class Productsearch extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton back;
     private javax.swing.JButton jButton1;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
@@ -278,5 +310,6 @@ public class Productsearch extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private java.awt.Label label1;
+    private javax.swing.JButton next;
     // End of variables declaration//GEN-END:variables
 }
