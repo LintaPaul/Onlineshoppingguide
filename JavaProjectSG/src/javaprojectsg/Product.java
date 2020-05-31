@@ -21,6 +21,10 @@ class Product {
         this.amz=Am;
         
     }
+
+    Product(String brand) {
+        this.brand = brand; //To change body of generated methods, choose Tools | Templates.
+    }
     
     public String getName(){
         return name;
