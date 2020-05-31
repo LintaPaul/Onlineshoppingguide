@@ -30,7 +30,7 @@ public class mainWindow extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         search = new javax.swing.JButton();
         cancel = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        pbrands = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -54,7 +54,12 @@ public class mainWindow extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("View popular brands");
+        pbrands.setText("View popular brands");
+        pbrands.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pbrandsActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Compare prices");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -84,7 +89,7 @@ public class mainWindow extends javax.swing.JFrame {
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pbrands, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -104,7 +109,7 @@ public class mainWindow extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addGap(29, 29, 29)
-                .addComponent(jButton1)
+                .addComponent(pbrands)
                 .addGap(30, 30, 30)
                 .addComponent(jButton3)
                 .addGap(27, 27, 27)
@@ -152,6 +157,12 @@ public class mainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void pbrandsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pbrandsActionPerformed
+                  this.dispose();
+                  brands br=new brands();   
+                  br.setVisible(true);// TODO add your handling code here:
+    }//GEN-LAST:event_pbrandsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -190,13 +201,13 @@ public class mainWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton pbrands;
     private javax.swing.JButton search;
     // End of variables declaration//GEN-END:variables
 }
