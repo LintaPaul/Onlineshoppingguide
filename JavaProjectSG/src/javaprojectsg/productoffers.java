@@ -114,7 +114,6 @@ public final class productoffers extends javax.swing.JPanel {
 
         jButton1.setBackground(new java.awt.Color(51, 51, 255));
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(240, 240, 240));
         jButton1.setText("Search");
         jButton1.setMargin(new java.awt.Insets(20, 20, 20, 20));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
