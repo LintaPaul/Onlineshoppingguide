@@ -58,8 +58,8 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-            <LineBorder roundedCorners="true" thickness="10">
-              <Color PropertyName="color" blue="ff" green="99" red="66" type="rgb"/>
+            <LineBorder roundedCorners="true" thickness="14">
+              <Color PropertyName="color" blue="ff" green="33" red="0" type="rgb"/>
             </LineBorder>
           </Border>
         </Property>
@@ -69,73 +69,82 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jScrollPane1" min="-2" pref="680" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane1" min="-2" pref="680" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                                  <Component id="jLabel2" min="-2" pref="176" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                                  <Component id="searchCat" min="-2" pref="289" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="ppb2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                          <Component id="jLabel2" min="-2" pref="176" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="searchCat" min="-2" pref="289" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="304" max="-2" attributes="0"/>
-                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="ppb2" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="62" max="32767" attributes="0"/>
+                  <EmptySpace pref="52" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="brandList" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="14" pref="14" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="back" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="jLabel1" min="-2" pref="442" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
-                          <Component id="next" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <Component id="next" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="-2" pref="304" max="-2" attributes="0"/>
+                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="brandList" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="14" pref="14" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <Component id="back" min="-2" max="-2" attributes="0"/>
-                      <Component id="next" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="searchCat" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="back" min="-2" max="-2" attributes="0"/>
+                              <Component id="next" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
-                      <Component id="brandList" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="ppb2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="brandList" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="ppb2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="searchCat" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
+                              <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
                   <Component id="jScrollPane1" min="-2" pref="165" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -222,7 +231,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="back">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&lt;--Back"/>
+            <Property name="text" type="java.lang.String" value="&lt;--Back to menu"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
+                <BevelBorder/>
+              </Border>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backActionPerformed"/>
@@ -230,7 +244,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="next">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Next--&gt;"/>
+            <Property name="text" type="java.lang.String" value="Offers--&gt;"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nextActionPerformed"/>

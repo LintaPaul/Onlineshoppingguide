@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -68,7 +69,7 @@ public class brands extends javax.swing.JFrame {
         setAutoRequestFocus(false);
         setBackground(new java.awt.Color(102, 102, 255));
 
-        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 153, 255), 10, true));
+        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 255), 14, true));
 
         jTable1.setBackground(new java.awt.Color(193, 215, 254));
         jTable1.setFont(new java.awt.Font("Open Sans Condensed", 3, 14)); // NOI18N
@@ -120,14 +121,15 @@ public class brands extends javax.swing.JFrame {
         jLabel1.setText("View popular brands");
         jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        back.setText("<--Back");
+        back.setText("<--Back to menu");
+        back.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backActionPerformed(evt);
             }
         });
 
-        next.setText("Next-->");
+        next.setText("Offers-->");
         next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nextActionPerformed(evt);
@@ -142,58 +144,65 @@ public class brands extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(35, 35, 35)
-                                .addComponent(searchCat, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(ppb2)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(304, 304, 304)
-                        .addComponent(jButton1)))
-                .addContainerGap(62, Short.MAX_VALUE))
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(searchCat, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ppb2))
+                .addContainerGap(52, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(brandList)
-                        .addGap(14, 14, 14))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(back)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(74, 74, 74)
-                        .addComponent(next)
-                        .addContainerGap())))
+                        .addGap(44, 44, 44)))
+                .addComponent(next)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(304, 304, 304)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(brandList)
+                .addGap(14, 14, 14))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(back)
-                    .addComponent(next))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(back)
+                            .addComponent(next))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addGap(7, 7, 7)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(brandList)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ppb2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(searchCat, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32)
-                        .addComponent(jButton1))
-                    .addComponent(brandList))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ppb2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(searchCat, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(27, 27, 27)
+                        .addComponent(jButton1)
+                        .addGap(68, 68, 68)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81))
+                .addGap(37, 37, 37))
         );
 
         ppb.setFont(new java.awt.Font("Open Sans Condensed", 3, 16)); // NOI18N
@@ -302,14 +311,20 @@ for(int i=0;i<prds.size(); i++){
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
                 this.dispose();
-                Productsearch p=new Productsearch();
-                p.setVisible(true);// TODO add your handling code here:
+                mainWindow mw=new mainWindow();
+                mw.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_backActionPerformed
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
                 this.dispose();
-                fd f=new fd();
-                f.setVisible(true);      // TODO add your handling code here:
+                productoffers po=new productoffers();
+                JFrame frame = new JFrame();
+                 frame.add(po);
+               frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+               frame.pack();
+               frame.setLocationRelativeTo(null);
+             frame.setVisible(true);
+                // TODO add your handling code here:
     }//GEN-LAST:event_nextActionPerformed
 
     /**
