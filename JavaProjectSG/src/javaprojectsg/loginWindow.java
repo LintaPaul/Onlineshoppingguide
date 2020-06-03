@@ -31,7 +31,7 @@ public class loginWindow extends javax.swing.JFrame {
         Connection con;
         
         try {
-            String dburl= "jdbc:mysql://localhost:3306/shoppingguide?zeroDateTimeBehavior=convertToNull";
+            String dburl= "jdbc:mysql://localhost:3306/shoppingguide?useSSL=false";
 	    String user="root";
 	    String pass="root";
 	    con=DriverManager.getConnection(dburl,user,pass);
@@ -56,34 +56,36 @@ public class loginWindow extends javax.swing.JFrame {
             try{
                 Connection con=getConnection();
                 Statement myStatement=con.createStatement();
-	    ResultSet myResultSet=myStatement.executeQuery("select username,passwords from users");
-                
-         while(myResultSet.next()){
+	        String query;
+                query = "select username,passwords from users where username='"+username.getText()+"' and passwords='"+password.getText()+"'";
+ResultSet myResultSet=myStatement.executeQuery(query);
+           if(myResultSet.next()==true){
+               
+                       JOptionPane.showMessageDialog(null, "Login successful");
+                       return true;
+           }    
+           else
+           {
+                   JOptionPane.showMessageDialog(null,"invalid username or password");
+                       
+               return false;
              
-                     if(myResultSet.getString("username").equals(username.getText())){
-                         if(myResultSet.getString("passwords").equals(password.getText())){
-                             JOptionPane.showMessageDialog(null, "Login successful");
-                                 return true;
-                             }
-                             else{
-                             JOptionPane.showMessageDialog(null,"Password is incorrect!");
-                             return false;
-                         }}
-                     else{
-                        JOptionPane.showMessageDialog(null, "not registered");}
-                     
-         }
-    
-    
-            }catch(Exception ex){
-                JOptionPane.showMessageDialog(null,"Some error occured");
+           }
+         
             }
-        }else{
-            JOptionPane.showMessageDialog(null,"one or more fields are empty");
+                            catch(SQLException ex){
+                                    
+                        JOptionPane.showMessageDialog(null,ex);
+                            }
+        
+         }
+        else{
+            JOptionPane.showMessageDialog(null, "one or more fields are empty");
         }
         return false;
-        
+       
     }
+    
     
     public boolean checkUsername(){
         
