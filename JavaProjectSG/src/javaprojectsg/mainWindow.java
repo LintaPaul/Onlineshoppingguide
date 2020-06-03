@@ -5,6 +5,8 @@
  */
 package javaprojectsg;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author sarang
@@ -31,14 +33,16 @@ public class mainWindow extends javax.swing.JFrame {
         search = new javax.swing.JButton();
         cancel = new javax.swing.JButton();
         pbrands = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        cmp = new javax.swing.JButton();
+        offerbtn = new javax.swing.JButton();
+        fdbk = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(0, 0));
+
+        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 102, 255), 14, true));
 
         search.setText("Search Products");
         search.addActionListener(new java.awt.event.ActionListener() {
@@ -61,16 +65,26 @@ public class mainWindow extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Compare prices");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        cmp.setText("Compare prices");
+        cmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                cmpActionPerformed(evt);
             }
         });
 
-        jButton3.setText("View offers");
+        offerbtn.setText("View offers");
+        offerbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                offerbtnActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Give feedback");
+        fdbk.setText("Give feedback");
+        fdbk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fdbkActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Check balance");
 
@@ -86,11 +100,11 @@ public class mainWindow extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(184, 184, 184)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmp, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(offerbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pbrands, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fdbk, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(259, 259, 259)
@@ -107,16 +121,16 @@ public class mainWindow extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addComponent(search)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(cmp)
                 .addGap(29, 29, 29)
                 .addComponent(pbrands)
                 .addGap(30, 30, 30)
-                .addComponent(jButton3)
+                .addComponent(offerbtn)
                 .addGap(27, 27, 27)
-                .addComponent(jButton4)
+                .addComponent(fdbk)
                 .addGap(18, 18, 18)
                 .addComponent(jButton5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(cancel)
                 .addContainerGap())
         );
@@ -128,7 +142,7 @@ public class mainWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(169, 169, 169)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(307, Short.MAX_VALUE))
+                .addContainerGap(279, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,15 +167,34 @@ public class mainWindow extends javax.swing.JFrame {
         firstwindow.setVisible(true);
     }//GEN-LAST:event_cancelActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void cmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmpActionPerformed
+        this.dispose();
+        Compareprice cm=new Compareprice();
+        cm.setVisible(true);    // TODO add your handling code here:
+    }//GEN-LAST:event_cmpActionPerformed
 
     private void pbrandsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pbrandsActionPerformed
                   this.dispose();
                   brands br=new brands();   
                   br.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_pbrandsActionPerformed
+
+    private void fdbkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fdbkActionPerformed
+                 this.dispose();
+                 Feedback fd=new Feedback();
+                 fd.setVisible(true);// TODO add your handling code here:
+    }//GEN-LAST:event_fdbkActionPerformed
+
+    private void offerbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_offerbtnActionPerformed
+                 this.dispose();
+                 productoffers po=new productoffers();
+                 JFrame frame = new JFrame();
+                 frame.add(po);
+               frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+               frame.pack();
+               frame.setLocationRelativeTo(null);
+             frame.setVisible(true);// TODO add your handling code here:
+    }//GEN-LAST:event_offerbtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,12 +234,12 @@ public class mainWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancel;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton cmp;
+    private javax.swing.JButton fdbk;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton offerbtn;
     private javax.swing.JButton pbrands;
     private javax.swing.JButton search;
     // End of variables declaration//GEN-END:variables
