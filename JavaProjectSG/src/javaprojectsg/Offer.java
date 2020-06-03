@@ -13,14 +13,14 @@ package javaprojectsg;
  */
 class Offer {
     private String cgryname,site;
-    public double discountpct;
-    public Offer(String cgryname, String site, double discountpct)
+    private int discountpct;
+    public Offer(String cgryname, Integer discountpct,String site)
     {
         this.cgryname=cgryname;
         this.discountpct=discountpct;
         this.site=site;
     }
-    public double getdiscountpct(){
+    public int getdiscountpct(){
         return discountpct;
     }
     public String getcgryname(){
