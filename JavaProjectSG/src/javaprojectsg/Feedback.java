@@ -6,6 +6,7 @@
 
 package javaprojectsg;
 
+import java.awt.event.ActionEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -201,76 +202,19 @@ public class Feedback extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-/*
+
     private void fdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fdActionPerformed
-        Connection con;
-        
-        try {
-            String dburl= "jdbc:mysql://localhost:3306/shoppingguide?zeroDateTimeBehavior=convertToNull";
-	    String user="root";
-	    String pass="root";
-	    con=DriverManager.getConnection(dburl,user,pass);
-            String query="insert into feedbacks(fdbk) values(?)";
-            PreparedStatement pst= con.prepareStatement(query);
-            pst.setString(1, rt.getText());
-            pst.executeUpdate();
-             JOptionPane.showMessageDialog(null,"successfully inserted");
-            
-            
-            
-            
-        } catch (SQLException ex) {
-            
-            JOptionPane.showMessageDialog(null,"not connected");
-        }        // TODO add your handling code here:
+            // TODO add your handling code here:
     }//GEN-LAST:event_fdActionPerformed
 
     private void unActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unActionPerformed
-       Connection con;
-        
-        try {
-            String dburl= "jdbc:mysql://localhost:3306/shoppingguide?zeroDateTimeBehavior=convertToNull";
-	    String user="root";
-	    String pass="abcd.1234";
-	    con=DriverManager.getConnection(dburl,user,pass);
-            String query="insert into feedbacks(uname) values(?)";
-            PreparedStatement pst= con.prepareStatement(query);
-            pst.setString(1, un.getText());
-            pst.executeUpdate();
-             JOptionPane.showMessageDialog(null,"successfully inserted");
-            
-            
-            
-            
-        } catch (SQLException ex) {
-            
-            JOptionPane.showMessageDialog(null,"not connected");
-        }        // TODO add your handling code here:
+       
     }//GEN-LAST:event_unActionPerformed
 
     private void pnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pnActionPerformed
-        Connection con;
         
-        try {
-            String dburl= "jdbc:mysql://localhost:3306/shoppingguide?zeroDateTimeBehavior=convertToNull";
-	    String user="root";
-	    String pass="abcd.1234";
-	    con=DriverManager.getConnection(dburl,user,pass);
-            String query="insert into feedbacks(pname) values(?)";
-            PreparedStatement pst= con.prepareStatement(query);
-            pst.setString(1, pn.getText());
-            pst.executeUpdate();
-             JOptionPane.showMessageDialog(null,"successfully inserted");
-            
-            
-            
-            
-        } catch (SQLException ex) {
-            
-            JOptionPane.showMessageDialog(null,"not connected");
-        }       
     }//GEN-LAST:event_pnActionPerformed
-*/
+
     public Connection getConnection(){
         Connection con=null;
         try{
