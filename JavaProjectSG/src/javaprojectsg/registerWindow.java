@@ -27,7 +27,7 @@ public class registerWindow extends javax.swing.JFrame {
         try {
             String dburl= "jdbc:mysql://localhost:3306/shoppingguide?zeroDateTimeBehavior=convertToNull";
 	    String user="root";
-	    String pass="Sarang@123";
+	    String pass="root";
 	    con=DriverManager.getConnection(dburl,user,pass);
             
             return con;
