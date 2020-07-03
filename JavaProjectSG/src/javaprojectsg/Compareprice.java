@@ -51,7 +51,7 @@ public class Compareprice extends javax.swing.JFrame {
         try{
             Connection con= getConnection();
             st=con.createStatement();
-            String query="select flipkart,amazon from products where prname='"+ValtoSearch+"'order by amazon";
+            String query="select brdname,flipkart,amazon from products where prname='"+ValtoSearch+"'order by amazon";
             
            ResultSet rs=st.executeQuery(query);
             Compareproduct pr;
@@ -59,7 +59,7 @@ public class Compareprice extends javax.swing.JFrame {
                
             
             while(rs.next()){
-                pr=new Compareproduct(rs.getDouble("amazon"),rs.getDouble("flipkart"));
+                pr=new Compareproduct(rs.getString("brdname"),rs.getDouble("amazon"),rs.getDouble("flipkart"));
              productsList.add(pr);   
                    
             }
@@ -76,8 +76,8 @@ public class Compareprice extends javax.swing.JFrame {
     public void Compproducts(){
         ArrayList<Compareproduct> prds=listproducts(jTextField1.getText());
         DefaultTableModel model=new DefaultTableModel();
-        model.setColumnIdentifiers(new Object[]{"Sitename","Price","Comparison","Sitename","Price"});
-        Object[] row=new Object[5];
+        model.setColumnIdentifiers(new Object[]{"Sitename","Price","Comparison","Sitename","Price","Brand"});
+        Object[] row=new Object[6];
         for(int i=0;i<prds.size(); i++){
             if(prds.get(i).getRes()==1){
                 row[0]="Amazon";
@@ -85,6 +85,7 @@ public class Compareprice extends javax.swing.JFrame {
                 row[2]="<";
                 row[3]="Flipkart";
                 row[4]=prds.get(i).getFp();
+                row[5]=prds.get(i).getBr();
                 
             } else {
                 row[0]="Flipkart";
@@ -92,8 +93,9 @@ public class Compareprice extends javax.swing.JFrame {
                 row[2]="<";
                 row[3]="Amazon";
                 row[4]=prds.get(i).getAp();
-                
+                 row[5]=prds.get(i).getBr();
             }
+            
             
             model.addRow(row);
         }
@@ -316,6 +318,8 @@ public class Compareprice extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Compareprice.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
