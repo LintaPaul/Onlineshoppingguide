@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -17,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author sarang
+ * @author arun
  */
 public class productOffers extends javax.swing.JFrame {
 
@@ -27,7 +28,7 @@ public class productOffers extends javax.swing.JFrame {
     
     public productOffers() {
         initComponents();
-       // findOffers();
+        
         jTable1.getTableHeader().setBackground(Color.white);
        jTable1.getTableHeader().setPreferredSize(new Dimension(100, 32));
     }
@@ -45,27 +46,37 @@ public class productOffers extends javax.swing.JFrame {
         ArrayList<Offer> offersList=new ArrayList<Offer> ();
         
         Statement st;
-        ResultSet rs;
+        
         try{
             Connection con= getConnection();
             st=con.createStatement();
-            String query="select * from offers where cgryname='"+ValtoSearch+"'";
+            String query="select cgryname,discountpct,site from offers where cgryname='"+ValtoSearch+"'";
             
-            rs=st.executeQuery(query);
+            ResultSet rs=st.executeQuery(query);
             Offer pr;
             
-            while(rs.next()){
+            
+                
+             if(rs.next()){  
+            do{
                 pr=new Offer(
                 rs.getString("cgryname"), rs.getInt("discountpct"), rs.getString("site"));
               
              offersList.add(pr);   
                    
-            }
+            }while(rs.next());}
+             else{
+                JOptionPane.showMessageDialog(null,"sorry no offers in this category"); 
+             }
+            
+            
+              
         }
-        catch(Exception ex){
+        catch(SQLException ex){
+            
              System.out.println(ex.getMessage());
         }
-        return offersList;
+       return offersList;
     }   
  public void findOffers(){
         
@@ -301,6 +312,7 @@ public class productOffers extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(productOffers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

@@ -7,7 +7,7 @@ package javaprojectsg;
 
 /**
  *
- * @author LINTA
+ * @author sarang
  */
 class Compareproduct{
     

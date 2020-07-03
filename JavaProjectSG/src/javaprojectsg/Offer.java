@@ -9,7 +9,7 @@ package javaprojectsg;
 
 /**
  *
- * @author Asus
+ * @author Arun
  */
 class Offer {
     private String cgryname,site;

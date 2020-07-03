@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author sarang
+ * @author LINTA
  */
 public class registerWindow extends javax.swing.JFrame {
 
