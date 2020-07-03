@@ -10,15 +10,15 @@ package javaprojectsg;
  * @author LINTA
  */
 class Product {
-    private String name,category,brand;
-    private Double mrp,fp,amz;
-    public Product(String Name,String Category,String Brand,Double Mrp,Double Fp,Double Am){
+    private String name,category,brand,avs;
+    private Double mrp;
+    public Product(String Name,String Category,String Brand,Double Mrp,String Avs){
         this.name=Name;
         this.category=Category;
         this.brand=Brand;
         this.mrp=Mrp;
-        this.fp=Fp;
-        this.amz=Am;
+        this.avs=Avs;
+        
         
     }
 
@@ -38,11 +38,12 @@ class Product {
     public Double getMrp(){
         return mrp;
     }
-    public Double getFp(){
-        return fp;
-    }
+    /*
     public Double getAm(){
         return amz;
+    }*/
+    public String getsite(){
+        return avs;
     }
     
 }

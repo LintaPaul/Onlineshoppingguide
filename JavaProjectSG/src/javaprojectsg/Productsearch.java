@@ -31,68 +31,123 @@ public class Productsearch extends javax.swing.JFrame {
      */
     public Productsearch() {
         initComponents();
-       jTable1.getTableHeader().setBackground(Color.white);
-       jTable1.getTableHeader().setPreferredSize(new Dimension(100, 32));
-//        findProducts();
+        jTable1.getTableHeader().setBackground(Color.white);
+        jTable1.getTableHeader().setPreferredSize(new Dimension(100, 32));
+        jTable2.getTableHeader().setBackground(Color.white);
+
     }
-    public Connection getConnection(){
-        Connection con=null;
-        try{
-             con =DriverManager.getConnection("jdbc:mysql://localhost:3306/shoppingguide?useSSL=false", "root", "root");
-        }
-        catch(Exception ex){
+
+    public Connection getConnection() {
+        Connection con = null;
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/shoppingguide?useSSL=false", "root", "root");
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
         return con;
     }
-    public ArrayList<Product> listproducts(String ValtoSearch){
-        ArrayList<Product> productsList=new ArrayList<Product> ();
-        
+
+    public ArrayList<Product> listproducts(String ValtoSearch) {
+        ArrayList<Product> productsList = new ArrayList<Product>();
+
         Statement st;
-        
-        try{
-            Connection con= getConnection();
-            st=con.createStatement();
-            String query="select * from products where prname='"+ValtoSearch+"'";
-            
-           ResultSet rs=st.executeQuery(query);
+
+        try {
+            Connection con = getConnection();
+            st = con.createStatement();
+            String query = "select prname,Category,brdname,mrp,availablesites from products where prname='" + ValtoSearch + "'";
+
+            ResultSet rs = st.executeQuery(query);
             Product pr;
-            
-               
-            
-            while(rs.next()){
-                pr=new Product(
-                rs.getString("prname"),
-                rs.getString("Category"),
-                rs.getString("brdname"),
-                rs.getDouble("mrp"),
-                rs.getDouble("flipkart"),
-                rs.getDouble("amazon"));
-             productsList.add(pr);         
-            } 
-        }
-        catch(SQLException ex){
-            
-             System.out.println(ex.getMessage());
+
+            if(rs.next()){
+            do {
+                pr = new Product(
+                        rs.getString("prname"),
+                        rs.getString("Category"),
+                        rs.getString("brdname"),
+                        rs.getDouble("mrp"),
+                        rs.getString("availablesites"));
+                
+                productsList.add(pr);
+            }while(rs.next());}
+            else{
+                JOptionPane.showMessageDialog(null,"sorry product unavailable");
+            }
+        } catch (SQLException ex) {
+
+            System.out.println(ex.getMessage());
         }
         return productsList;
-        
+
     }
-    public void findProducts(){
-        ArrayList<Product> prds=listproducts(jTextField1.getText());
-        DefaultTableModel model=new DefaultTableModel();
-        model.setColumnIdentifiers(new Object[]{"Product","Category","Brand","Mrp","Flipkart price","Amazon price"});
-        Object[] row=new Object[6];
-        for(int i=0;i<prds.size(); i++){
-            row[0]=prds.get(i).getName();
-            row[1]=prds.get(i).getCategory();
-            row[2]=prds.get(i).getBrand();
-            row[3]=prds.get(i).getMrp();
-            row[4]=prds.get(i).getFp();
-            row[5]=prds.get(i).getAm();
+
+    public void findProducts() {
+        ArrayList<Product> prds = listproducts(jTextField1.getText());
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(new Object[]{"Product", "Category", "Brand", "Mrp", "Available In"});
+        Object[] row = new Object[5];
+        for (int i = 0; i < prds.size(); i++) {
+            row[0] = prds.get(i).getName();
+            row[1] = prds.get(i).getCategory();
+            row[2] = prds.get(i).getBrand();
+            row[3] = prds.get(i).getMrp();
+            /* row[4]=prds.get(i).getFp();
+            row[5]=prds.get(i).getAm();*/
+            row[4] = prds.get(i).getsite();
+            
             model.addRow(row);
         }
         jTable1.setModel(model);
+    }
+    public ArrayList<Fdb> listfdbs(String ValtoSearch) {
+        ArrayList<Fdb> fdList = new ArrayList<Fdb>();
+
+        Statement st;
+
+        try {
+            Connection con = getConnection();
+            st = con.createStatement();
+            String query = "select uname,brname,fdbk,prrtng from feedbacks where pname='" + ValtoSearch + "'";
+
+            ResultSet rs = st.executeQuery(query);
+            Fdb pr;
+
+            if(rs.next()){
+            do {
+                pr = new Fdb(
+                        rs.getString("uname"),
+                        rs.getString("brname"),
+                        rs.getString("fdbk"),
+                        rs.getDouble("prrtng"));
+                
+                fdList.add(pr);
+            }while(rs.next());}
+            else{
+                JOptionPane.showMessageDialog(null,"sorry product unavailable");
+            }
+        } catch (SQLException ex) {
+
+            System.out.println(ex.getMessage());
+        }
+        return fdList;
+
+    }
+    public void findFeedbacks() {
+        ArrayList<Fdb> fds = listfdbs(jTextField1.getText());
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(new Object[]{"Customer name","Brand", "Feedback", "Rating given"});
+        Object[] row = new Object[4];
+        for (int i = 0; i < fds.size(); i++) {
+            row[0] = fds.get(i).getName();
+            row[1] = fds.get(i).getBrand();
+            row[2] = fds.get(i).getFeed();
+            row[3] = fds.get(i).getrtng();
+            
+            
+            model.addRow(row);
+        }
+        jTable2.setModel(model);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -109,11 +164,14 @@ public class Productsearch extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        search = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        back = new javax.swing.JButton();
-        next = new javax.swing.JButton();
+        home = new javax.swing.JButton();
+        compareprice = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -148,13 +206,13 @@ public class Productsearch extends javax.swing.JFrame {
         jTextField1.setBackground(new java.awt.Color(204, 204, 204));
         jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204), 2));
 
-        jButton1.setBackground(new java.awt.Color(32, 27, 92));
-        jButton1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Search");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        search.setBackground(new java.awt.Color(32, 27, 92));
+        search.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        search.setForeground(new java.awt.Color(255, 255, 255));
+        search.setText("Search");
+        search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                searchActionPerformed(evt);
             }
         });
 
@@ -162,19 +220,19 @@ public class Productsearch extends javax.swing.JFrame {
 
         jTable1.setAutoCreateRowSorter(true);
         jTable1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jTable1.setForeground(new java.awt.Color(0, 0, 0));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Product", "Category", "Brand", "MRP", "Flipkart price", "Amazon price"
+                "Product", "Category", "Brand", "MRP", "Available in"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -185,28 +243,54 @@ public class Productsearch extends javax.swing.JFrame {
         jTable1.setIntercellSpacing(new java.awt.Dimension(5, 5));
         jTable1.setRowHeight(35);
         jTable1.setSelectionBackground(new java.awt.Color(32, 27, 92));
-        jTable1.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jTable1.setShowHorizontalLines(false);
         jTable1.setSurrendersFocusOnKeystroke(true);
         jScrollPane1.setViewportView(jTable1);
 
-        back.setBackground(new java.awt.Color(164, 164, 200));
-        back.setForeground(new java.awt.Color(0, 0, 0));
-        back.setText("HOME");
-        back.addActionListener(new java.awt.event.ActionListener() {
+        home.setBackground(new java.awt.Color(164, 164, 200));
+        home.setText("HOME");
+        home.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backActionPerformed(evt);
+                homeActionPerformed(evt);
             }
         });
 
-        next.setBackground(new java.awt.Color(164, 164, 200));
-        next.setForeground(new java.awt.Color(0, 0, 0));
-        next.setText("COMPARE PRICES");
-        next.addActionListener(new java.awt.event.ActionListener() {
+        compareprice.setBackground(new java.awt.Color(164, 164, 200));
+        compareprice.setText("COMPARE PRICES");
+        compareprice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nextActionPerformed(evt);
+                comparepriceActionPerformed(evt);
             }
         });
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Customer Name", "Brand", "Feedack", "Rating"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable2);
+
+        jLabel3.setText("Feedbacks from customers");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -215,24 +299,27 @@ public class Productsearch extends javax.swing.JFrame {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(home, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(next, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(compareprice, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 725, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(336, 336, 336))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(137, 137, 137)
+                .addGap(0, 39, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(25, 25, 25))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(264, 264, 264))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(454, 454, 454)
+                .addComponent(search)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -240,19 +327,27 @@ public class Productsearch extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(back, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                    .addComponent(next, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(home, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(compareprice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(11, 11, 11)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(search)
+                        .addGap(75, 75, 75)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(87, 87, 87))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -260,7 +355,7 @@ public class Productsearch extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(47, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46))
         );
@@ -282,32 +377,31 @@ public class Productsearch extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 4, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-             
-                findProducts();
-            
-                 
-                 
-             // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
 
-    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
-                   this.dispose();
-                   mainWindow mr=new mainWindow();
-                   mr.setVisible(true);// TODO add your handling code here:
-    }//GEN-LAST:event_backActionPerformed
+        findProducts();
+        findFeedbacks();
 
-    private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-                this.dispose();
-                Compareprice cp=new Compareprice();
-                cp.setVisible(true);// TODO add your handling code here:
-    }//GEN-LAST:event_nextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchActionPerformed
+
+    private void homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeActionPerformed
+        this.dispose();
+        mainWindow mr = new mainWindow();
+        mr.setVisible(true);// TODO add your handling code here:
+    }//GEN-LAST:event_homeActionPerformed
+
+    private void comparepriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comparepriceActionPerformed
+        this.dispose();
+        Compareprice cp = new Compareprice();
+        cp.setVisible(true);// TODO add your handling code here:
+    }//GEN-LAST:event_comparepriceActionPerformed
 
     /**
      * @param args the command line arguments
@@ -335,6 +429,7 @@ public class Productsearch extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Productsearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -345,16 +440,19 @@ public class Productsearch extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton back;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton compareprice;
+    private javax.swing.JButton home;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JButton next;
+    private javax.swing.JButton search;
     // End of variables declaration//GEN-END:variables
 }

@@ -229,7 +229,7 @@ public class brands extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(ppb, javax.swing.GroupLayout.DEFAULT_SIZE, 8, Short.MAX_VALUE)
                 .addGap(839, 839, 839))
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -253,7 +253,7 @@ public class brands extends javax.swing.JFrame {
 public void findBrands(){
 ArrayList<Product> prds=listproducts(searchCat.getText());
 DefaultTableModel model=new DefaultTableModel();
-model.setColumnIdentifiers(new Object[]{"(According to Customer's Rating)"});
+model.setColumnIdentifiers(new Object[]{"(According to a popular survey)"});
 ppb.setText("Popular Brands in "+searchCat.getText());
 searchCat.setText("");
 Object[] row=new Object[1];
@@ -363,6 +363,7 @@ for(int i=0;i<prds.size(); i++){
             java.util.logging.Logger.getLogger(brands.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -401,7 +402,7 @@ for(int i=0;i<prds.size(); i++){
             Product pr;
             if(rs.next()==false)
             {
-                JOptionPane.showMessageDialog(null,"Product not available");
+                JOptionPane.showMessageDialog(null,"Category or brand not available");
             }
              //System.out.println(rs.getString("brname"));
           do {

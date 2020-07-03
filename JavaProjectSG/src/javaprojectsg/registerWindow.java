@@ -22,8 +22,7 @@ public class registerWindow extends javax.swing.JFrame {
     /**
      * Creates new form resgisterWindow
      */public Connection getConnection(){
-        Connection con;
-        
+        Connection con;     
         try {
             String dburl= "jdbc:mysql://localhost:3306/shoppingguide?zeroDateTimeBehavior=convertToNull";
 	    String user="root";
@@ -71,8 +70,8 @@ public class registerWindow extends javax.swing.JFrame {
     
     public void cancel(){
         this.dispose();
-        firstWindow firstwindow=new firstWindow();
-        firstwindow.setVisible(true);
+        Registernew r=new Registernew();
+        r.setVisible(true);
     }
     
     
@@ -166,7 +165,7 @@ public class registerWindow extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel2.setText("Budget(Monthly limit):");
+        jLabel2.setText("Budget:");
 
         budget.setBackground(new java.awt.Color(204, 204, 204));
         budget.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 2, true));
@@ -289,7 +288,7 @@ public class registerWindow extends javax.swing.JFrame {
                 ps.setString(3, email.getText());
                 ps.setString(4, budget.getText());
                 ps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "DATA INSERTED");
+                JOptionPane.showMessageDialog(null, "Registered successfully");
                 
                 System.out.println("Name :  "+ username.getText());
                 System.out.println("Name :  "+ password.getText());
@@ -336,6 +335,10 @@ public class registerWindow extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(registerWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

@@ -23,8 +23,10 @@ public class loginWindow extends javax.swing.JFrame {
     /**
      * Creates new form loginWindow
      */
+    public String user;
     public loginWindow() {
         initComponents();
+      
     }
     
     public Connection getConnection(){
@@ -60,8 +62,8 @@ public class loginWindow extends javax.swing.JFrame {
                 query = "select username,passwords from users where username='"+username.getText()+"' and passwords='"+password.getText()+"'";
 ResultSet myResultSet=myStatement.executeQuery(query);
            if(myResultSet.next()==true){
-               
                        JOptionPane.showMessageDialog(null, "Login successful");
+                       
                        return true;
            }    
            else
@@ -86,7 +88,7 @@ ResultSet myResultSet=myStatement.executeQuery(query);
        
     }
     
-    
+  
     public boolean checkUsername(){
         
         try {
@@ -258,7 +260,7 @@ ResultSet myResultSet=myStatement.executeQuery(query);
         
 // TODO add your handling code here:
     }//GEN-LAST:event_passwordActionPerformed
-
+    
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         
             
@@ -266,6 +268,9 @@ ResultSet myResultSet=myStatement.executeQuery(query);
                     
                     mainWindow mw=new mainWindow();
                     this.dispose();
+                    
+                    budget b=new budget(username.getText());
+                    
                     mw.setVisible(true);
                 };
 
@@ -275,8 +280,8 @@ ResultSet myResultSet=myStatement.executeQuery(query);
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
         this.dispose();
-        firstWindow firstwindow=new firstWindow();
-        firstwindow.setVisible(true);
+        Registernew r=new Registernew();
+        r.setVisible(true);
 // TODO add your handling code here:
     }//GEN-LAST:event_cancelActionPerformed
 
@@ -311,6 +316,8 @@ ResultSet myResultSet=myStatement.executeQuery(query);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(loginWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

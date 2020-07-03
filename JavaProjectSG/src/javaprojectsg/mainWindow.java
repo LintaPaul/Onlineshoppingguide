@@ -118,7 +118,7 @@ public class mainWindow extends javax.swing.JFrame {
         jButton5.setBackground(new java.awt.Color(106, 98, 210));
         jButton5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("Check balance");
+        jButton5.setText("Check product price with budget");
         jButton5.setBorder(null);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,8 +216,8 @@ public class mainWindow extends javax.swing.JFrame {
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
         this.dispose();
-        firstWindow firstwindow=new firstWindow();
-        firstwindow.setVisible(true);
+         Registernew r=new Registernew();
+        r.setVisible(true);
     }//GEN-LAST:event_cancelActionPerformed
 
     private void cmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmpActionPerformed
@@ -275,6 +275,8 @@ public class mainWindow extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(mainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
