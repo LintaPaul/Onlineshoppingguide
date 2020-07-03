@@ -9,7 +9,9 @@ package javaprojectsg;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javaprojectsg.mainWindow;
 import javax.swing.JOptionPane;
 
@@ -22,7 +24,7 @@ public class Feedback extends javax.swing.JFrame {
     /**
      * Creates new form fd
      */
-    public String us;
+    public static String us;
     public Feedback() {
         initComponents();
     }
@@ -53,8 +55,6 @@ public class Feedback extends javax.swing.JFrame {
         br = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        un = new javax.swing.JTextField();
 
         jLabel1.setText("jLabel1");
 
@@ -136,11 +136,6 @@ public class Feedback extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Your name:");
-
-        un.setBackground(new java.awt.Color(204, 204, 204));
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -166,9 +161,7 @@ public class Feedback extends javax.swing.JFrame {
                                         .addComponent(rtng)
                                         .addComponent(fd)
                                         .addComponent(br)
-                                        .addComponent(pn, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
-                                        .addComponent(jLabel3)
-                                        .addComponent(un)))))
+                                        .addComponent(pn, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
@@ -186,15 +179,11 @@ public class Feedback extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(9, 9, 9)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addGap(7, 7, 7)
-                .addComponent(un, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(39, 39, 39)
                 .addComponent(jLabel4)
-                .addGap(5, 5, 5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(25, 25, 25)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(br, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -202,11 +191,11 @@ public class Feedback extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fd, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rtng, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
+                .addGap(66, 66, 66)
                 .addComponent(submit)
                 .addContainerGap())
         );
@@ -265,17 +254,18 @@ public class Feedback extends javax.swing.JFrame {
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
          
         try {
-            Connection con=getConnection();
-            String query="insert into feedbacks values(?,?,?,?,?)";
+            
+              Connection con=getConnection();         
+            String query="insert into feedbacks values('"+us+"',?,?,?,?)";
             PreparedStatement pst= con.prepareStatement(query);
-            pst.setString(1, un.getText());
-            pst.setString(2, pn.getText());
-            pst.setString(3, br.getText());
-            pst.setString(4, fd.getText());
-            pst.setString(5, rtng.getText());
+            pst.setString(1, pn.getText());
+            pst.setString(2, br.getText());
+            pst.setString(3, fd.getText());
+            pst.setString(4, rtng.getText());
             pst.executeUpdate();
              JOptionPane.showMessageDialog(null,"successfully inserted");
-            
+           
+           
             
             
             
@@ -350,7 +340,6 @@ public class Feedback extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -360,6 +349,5 @@ public class Feedback extends javax.swing.JFrame {
     private javax.swing.JTextField pn;
     private javax.swing.JTextField rtng;
     private javax.swing.JButton submit;
-    private javax.swing.JTextField un;
     // End of variables declaration//GEN-END:variables
 }
