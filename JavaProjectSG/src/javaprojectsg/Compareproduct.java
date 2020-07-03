@@ -5,6 +5,7 @@
  */
 package javaprojectsg;
 
+
 /**
  *
  * @author sarang
@@ -14,11 +15,11 @@ class Compareproduct{
 
     private Double fprice,aprice;
     private String br;
+    
     public Compareproduct(String brd,Double APrice,Double FPrice){
         this.br=brd;
         this.aprice=APrice;
         this.fprice=FPrice;
-        
         
     }
 
