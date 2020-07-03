@@ -13,7 +13,9 @@ class Compareproduct{
     
 
     private Double fprice,aprice;
-    public Compareproduct(Double APrice,Double FPrice){
+    private String br;
+    public Compareproduct(String brd,Double APrice,Double FPrice){
+        this.br=brd;
         this.aprice=APrice;
         this.fprice=FPrice;
         
@@ -33,6 +35,9 @@ class Compareproduct{
     }
     public double getFp(){
         return fprice;
+    }
+    public String getBr(){
+        return br;
     }
 
 }
