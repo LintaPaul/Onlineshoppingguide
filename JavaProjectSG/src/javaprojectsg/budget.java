@@ -7,11 +7,13 @@ package javaprojectsg;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,13 +21,18 @@ import javax.swing.JOptionPane;
  */
 public class budget extends javax.swing.JFrame {
 
+    private Object jLable5;
+   public static String us;
+
     /**
      * Creates new form budget
-     */public static String us;
+     */
     public budget() {
         initComponents();
-        
+        jLabel6.setVisible(false);
+        jLabel7.setVisible(false);
     }
+    
     public budget(String u){
         this.us=u;
     }
@@ -48,10 +55,14 @@ public class budget extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        pn = new javax.swing.JTextField();
-        check = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        details = new javax.swing.JTextArea();
+        jTable1 = new javax.swing.JTable();
+        jButton4 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 10));
 
@@ -120,20 +131,68 @@ public class budget extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("Enter Product  Name");
 
-        pn.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField1.setBackground(new java.awt.Color(204, 204, 204));
 
-        check.setBackground(new java.awt.Color(204, 204, 204));
-        check.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        check.setText("CHECK");
-        check.addActionListener(new java.awt.event.ActionListener() {
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        jTable1.setAutoCreateRowSorter(true);
+        jTable1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Brand", "MRP"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setColumnSelectionAllowed(true);
+        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
+        jTable1.setIntercellSpacing(new java.awt.Dimension(5, 5));
+        jTable1.setRowHeight(35);
+        jTable1.setSelectionBackground(new java.awt.Color(32, 27, 92));
+        jTable1.setShowHorizontalLines(false);
+        jTable1.setSurrendersFocusOnKeystroke(true);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
+        jButton4.setFont(new java.awt.Font("Open Sans", 1, 12)); // NOI18N
+        jButton4.setText("Search");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkActionPerformed(evt);
+                jButton4ActionPerformed(evt);
             }
         });
 
-        details.setColumns(20);
-        details.setRows(5);
-        jScrollPane1.setViewportView(details);
+        jLabel5.setText("   ");
+
+        jLabel6.setText("jLabel6");
+
+        jLabel7.setText("jLabel7");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel8.setText("Balance sheet:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -141,23 +200,30 @@ public class budget extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton2))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(216, 216, 216)
-                        .addComponent(check, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 70, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addGap(32, 32, 32)
-                        .addComponent(pn, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(65, 65, 65))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel8)
+                        .addGap(45, 45, 45)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 200, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,15 +232,27 @@ public class budget extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(pn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addComponent(check)
-                .addGap(33, 33, 33)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton4)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel8)
+                        .addGap(62, 62, 62)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -182,16 +260,16 @@ public class budget extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 795, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -199,97 +277,177 @@ public class budget extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(83, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 785, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addGap(47, 47, 47)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    public Connection getConnection(){
-        Connection con;
-        
-        try {
-            String dburl= "jdbc:mysql://localhost:3306/shoppingguide?useSSL=false";
-	    String user="root";
-	    String pass="root";
-	    con=DriverManager.getConnection(dburl,user,pass);
-            
-            return con;
-        } catch (SQLException ex) {
-            
-            JOptionPane.showMessageDialog(null,"not connected");
-            return null;
-        }
-    }
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
                 this.dispose();
                 mainWindow mw=new mainWindow();
                 mw.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void checkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkActionPerformed
-                Double bd,mr,f,a;String br;Double total=0.0;
-                String msg;
-                 
-                try {
-            Connection con=getConnection();
-            
-            Statement st=con.createStatement();
-            
-            
-                    String q2="SELECT price from purchase where username='"+us+"'";
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+                     budgetProducts();           // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+public void compare(String s){
+     String b;
+     double bdj,mr,total,price;total=0.0;
+     double bal=0.0;
+     
+           
+
+try{
+                Connection con=getConnection();
+                Statement myStatement=con.createStatement();
+	        String query;
+             query = "select budget from users where loginStatus=1";
+             ResultSet myResultSet=myStatement.executeQuery(query);
+           if(myResultSet.next()==true){
+               b=myResultSet.getString("budget");
+               bdj=Double.parseDouble(b);
+               price=Double.parseDouble(s);
+               Statement st=con.createStatement();
+               String q2="SELECT price from purchase where username='"+us+"'";
                     ResultSet rst= st.executeQuery(q2);
                     while(rst.next()){
                         mr=rst.getDouble("price");
                         total+=mr;
                     }
-            String query="SELECT budget,flipkart,amazon,brdname from users,products where username='"+us+"' and prname='"+pn.getText()+"'";
-            ResultSet pst= st.executeQuery(query);
-            while(pst.next()){
-                
-                bd=pst.getDouble("budget");
-                f=pst.getDouble("flipkart");
-                a=pst.getDouble("amazon");
-                br=pst.getString("brdname");
-                details.append("\nBudget was "+bd+"\n");
-                details.append("You've already spent "+total+"\n");
-                details.append("Available balance"+(bd-total)+"\n");
-                if(f<a){
-                if((bd-total)>f){
-                    msg="You can buy "+pn.getText()+" of "+br+" from flipkart at "+ f +"\n"+"It is within your budget\n";
-                    JOptionPane.showMessageDialog(null,msg);
-                }
-                else{
-                    msg="You cannot buy "+pn.getText()+" of "+br+" it's least price is in flipkart \n"+" and it is above your budget\n";
-                    JOptionPane.showMessageDialog(null,msg);
-                }}
-                else{
-                    if((bd-total)>a){
-                     msg="You can buy "+pn.getText()+" of "+br+" from amazon at "+a+"\n"+"It is within your budget\n";
-                    JOptionPane.showMessageDialog(null,msg);   
-                    
-                }
-                else{
-                   msg="You cannot buy "+pn.getText()+" of "+br+" it's least price is in amazon \n"+" and it is above your budget\n";
-                    JOptionPane.showMessageDialog(null,msg); 
-                }
-                
-                }
-                
-            } details.setText(" ");
-                }
-            catch(SQLException e){
-                JOptionPane.showMessageDialog(null,e);
+                    bal=bdj-total;
+              
+               jLabel5.setText("Your budget was "+bdj);
+               jLabel6.setText("Already spent"+total);
+               jLabel7.setText("Now balance is "+bal); 
+               jLabel5.setVisible(true);
+               jLabel6.setVisible(true);
+               jLabel7.setVisible(true);
+               
+               if(price<=bal){
+                   
+                    JOptionPane.showMessageDialog(null,"Purchase within your balance");
+               }
+               
+                else
+           {
+                   JOptionPane.showMessageDialog(null,"Purchase exceeds balance");
+                       
+              
+             
+           }
+                      
+                     
+           }    
+           else
+           {
+                   JOptionPane.showMessageDialog(null,"error due to username not found");
+                       
+              
+             
+           }
+         
             }
-    }//GEN-LAST:event_checkActionPerformed
+                            catch(SQLException ex){
+                                    
+                        JOptionPane.showMessageDialog(null,ex);
+                            }   
+}
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+       JTable source = (JTable)evt.getSource();
+       
+            int row = source.rowAtPoint( evt.getPoint() );
+            int column = source.columnAtPoint( evt.getPoint() );
+            if(column==1){
+            String s=source.getModel().getValueAt(row, column)+"";
+            compare(s);
+            }
+  
+           
+            if(column!=1){
+                String s1=source.getModel().getValueAt(row, 1)+"";
+          
+                   compare(s1);
+    } 
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    
+    public void budgetProducts(){
+        ArrayList<Product> prds=listproducts(jTextField1.getText());
+        Double f,a;
+        DefaultTableModel model=new DefaultTableModel();
+        model.setColumnIdentifiers(new Object[]{"Brand","LeastMarketPrice","Buy from"});
+        Object[] row=new Object[3];
+        for(int i=0;i<prds.size(); i++){
+        
+            row[0]=prds.get(i).getBrand();
+            f=prds.get(i).getFp();
+            a=prds.get(i).getAm();
+            if(f<a){
+                row[1]=f;
+                row[2]="flipkart";
+            }
+            else{
+                row[1]=a;
+                row[2]="amazon";
+            }
+            
+            
+            model.addRow(row);
+        }
+        jTable1.setModel(model);
+    }
+public ArrayList<Product> listproducts(String ProSearch){
+        ArrayList<Product> productsList=new ArrayList<Product> ();
+        
+        Statement st;
+        
+        try{
+            Connection con= getConnection();
+            st=con.createStatement();
+            String query="select brdname,flipkart,amazon from products where prname='"+ProSearch+"'";
+            
+           ResultSet rs=st.executeQuery(query);
+            Product pr;
+            
+               
+            
+            while(rs.next()){
+                pr=new Product(
+                rs.getString("brdname"),
+                rs.getDouble("flipkart"),
+                rs.getDouble("amazon"));
+             productsList.add(pr);         
+            } 
+        }
+        catch(SQLException ex){
+            
+             System.out.println(ex.getMessage());
+        }
+        return productsList;
+        
+    }
+ public Connection getConnection(){
+        Connection con=null;
+        try{
+             con =DriverManager.getConnection("jdbc:mysql://localhost:3306/shoppingguide?useSSL=false", "root", "root");
+        }
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return con;
+    }
+
 
     /**
      * @param args the command line arguments
@@ -323,24 +481,27 @@ public class budget extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new budget().setVisible(true);
-                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton check;
-    private javax.swing.JTextArea details;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField pn;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
