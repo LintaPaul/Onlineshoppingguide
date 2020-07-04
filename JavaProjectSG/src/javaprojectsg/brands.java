@@ -330,7 +330,7 @@ for(int i=0;i<prds.size(); i++){
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
                 this.dispose();
-                productOffers po=new productOffers();
+                productOffers1 po=new productOffers1();
                 po.setVisible(true);
                 
                 // TODO add your handling code here:
