@@ -255,7 +255,7 @@ public class mainWindow extends javax.swing.JFrame {
 
     private void offerbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_offerbtnActionPerformed
                  this.dispose();
-                 productOffers po=new productOffers();  
+                 productOffers1 po=new productOffers1();  
                  po.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_offerbtnActionPerformed
 
