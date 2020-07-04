@@ -269,7 +269,7 @@ public class addproduct extends javax.swing.JFrame {
             Statement st=con.createStatement();
             String query="select * from purchase where username='"+user+"'";
             ResultSet pst= st.executeQuery(query);
-            purchase.append("Product \t Price\n");
+            purchase.setText("Product \t Price\n");
             while(pst.next()){
                 purchase.append(pst.getString("prname")+"\t"+pst.getDouble("price")+"\t"+"\n");
             }
