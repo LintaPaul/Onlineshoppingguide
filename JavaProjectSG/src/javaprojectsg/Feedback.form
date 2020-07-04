@@ -304,7 +304,7 @@
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="c8" green="a4" red="a4" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="CHECK BALANCE"/>
+                <Property name="text" type="java.lang.String" value="update purchase"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>

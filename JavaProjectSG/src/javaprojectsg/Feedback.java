@@ -129,7 +129,7 @@ public class Feedback extends javax.swing.JFrame {
         });
 
         jButton1.setBackground(new java.awt.Color(164, 164, 200));
-        jButton1.setText("CHECK BALANCE");
+        jButton1.setText("update purchase");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -283,8 +283,8 @@ public class Feedback extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
               this.dispose();
-              budget bw=new budget();
-                bw.setVisible(true);  // TODO add your handling code here:
+              addproduct ap=new addproduct();
+                ap.setVisible(true);  // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void brActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brActionPerformed
