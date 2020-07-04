@@ -23,12 +23,11 @@ public class loginWindow extends javax.swing.JFrame {
     /**
      * Creates new form loginWindow
      */
-    public String user;
     public loginWindow() {
         initComponents();
-      
     }
     
+
     public Connection getConnection(){
         Connection con;
         
@@ -58,12 +57,24 @@ public class loginWindow extends javax.swing.JFrame {
             try{
                 Connection con=getConnection();
                 Statement myStatement=con.createStatement();
+                Connection con1=getConnection();
+                Statement myStatement1=con1.createStatement();
 	        String query;
                 query = "select username,passwords from users where username='"+username.getText()+"' and passwords='"+password.getText()+"'";
-                ResultSet myResultSet=myStatement.executeQuery(query);
+                String query1= "UPDATE users  SET      loginStatus = 1 WHERE     username = '"+username.getText()+"'"; 
+ResultSet myResultSet=myStatement.executeQuery(query);
            if(myResultSet.next()==true){
+            myStatement1.executeUpdate(query1);
+            
+             
                        JOptionPane.showMessageDialog(null, "Login successful");
-                       
+                       myResultSet.close();
+      myStatement.close();
+      con.close();
+       myResultSet.close();
+      myStatement1.close();
+      con1.close();
+                      
                        return true;
            }    
            else
@@ -88,7 +99,7 @@ public class loginWindow extends javax.swing.JFrame {
        
     }
     
-  
+    
     public boolean checkUsername(){
         
         try {
@@ -191,15 +202,15 @@ public class loginWindow extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 73, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(139, 139, 139))
+                    .addComponent(jLabel1))
+                .addGap(65, 65, 65))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(126, 126, 126)
+                .addGap(119, 119, 119)
                 .addComponent(cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -208,19 +219,19 @@ public class loginWindow extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(43, 43, 43)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addGap(17, 17, 17))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -230,14 +241,14 @@ public class loginWindow extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(179, 179, 179)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addContainerGap(204, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(66, 66, 66)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -260,19 +271,16 @@ public class loginWindow extends javax.swing.JFrame {
         
 // TODO add your handling code here:
     }//GEN-LAST:event_passwordActionPerformed
-    
+
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         
             
                 if(checkLogin()){
-                    
-                    mainWindow mw=new mainWindow();
                     this.dispose();
-                    
-                    budget b=new budget(username.getText());
-                    Feedback f=new Feedback(username.getText());
-                    addproduct ad=new addproduct(username.getText());
-                    
+                    mainWindow mw=new mainWindow();
+                     budget b=new budget(username.getText());
+                     addproduct ap=new addproduct(username.getText());
+                     Feedback fd=new Feedback(username.getText());
                     mw.setVisible(true);
                 };
 
@@ -282,8 +290,8 @@ public class loginWindow extends javax.swing.JFrame {
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
         this.dispose();
-        Registernew r=new Registernew();
-        r.setVisible(true);
+        Registernew firstwindow=new Registernew();
+        firstwindow.setVisible(true);
 // TODO add your handling code here:
     }//GEN-LAST:event_cancelActionPerformed
 
