@@ -31,8 +31,7 @@ public class addproduct extends javax.swing.JFrame {
         pricelabel.setVisible(false);
         price.setVisible(false);
         purchase.setVisible(false);
-        monthlabel.setVisible(false);
-        monthfield.setVisible(false);
+        
         jButton1.setVisible(false);
     }
     public addproduct(String us){
@@ -70,13 +69,11 @@ public class addproduct extends javax.swing.JFrame {
         pricelabel = new javax.swing.JLabel();
         price = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        monthlabel = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         purchase = new javax.swing.JTextArea();
         jButton3 = new javax.swing.JButton();
-        monthfield = new javax.swing.JComboBox<>();
         menu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -104,9 +101,6 @@ public class addproduct extends javax.swing.JFrame {
             }
         });
 
-        monthlabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        monthlabel.setText("Month Of Purchase:");
-
         jButton2.setText("View purchase history");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,8 +118,6 @@ public class addproduct extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-
-        monthfield.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jan", "Feb", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -148,13 +140,9 @@ public class addproduct extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(pricelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(monthlabel)
-                                .addGap(35, 35, 35)
-                                .addComponent(monthfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(237, 237, 237)
+                        .addGap(227, 227, 227)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -173,18 +161,15 @@ public class addproduct extends javax.swing.JFrame {
                         .addGap(32, 32, 32)
                         .addComponent(jButton2)
                         .addGap(36, 36, 36)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(prlabel)
-                            .addComponent(jLabel6)
-                            .addComponent(prname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel6)
+                                .addComponent(prname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(pricelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(monthlabel)
-                            .addComponent(monthfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(42, 42, 42)
                         .addComponent(jButton1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -248,11 +233,11 @@ public class addproduct extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        try {
             Connection con=getConnection();       
-            String query="insert into purchase values('"+user+"',?,?,?)";
+            String query="insert into purchase values('"+user+"',?,?)";
             PreparedStatement pst= con.prepareStatement(query);
             pst.setString(1, prname.getText());
             pst.setString(2, price.getText());
-            pst.setString(3, String.valueOf(monthfield.getSelectedItem()));
+            
             pst.executeUpdate();
              JOptionPane.showMessageDialog(null,"successfully inserted");
            
@@ -273,7 +258,7 @@ public class addproduct extends javax.swing.JFrame {
             Statement st=con.createStatement();
             String query="select * from purchase where username='"+user+"'";
             ResultSet pst= st.executeQuery(query);
-            purchase.append("Product \t Price \t Month \n");
+            purchase.append("Product \t Price\n");
             while(pst.next()){
                 purchase.append(pst.getString("prname")+"\t"+pst.getDouble("price")+"\t"+"\n");
             }
@@ -293,8 +278,7 @@ public class addproduct extends javax.swing.JFrame {
         prname.setVisible(true);
         pricelabel.setVisible(true);
         price.setVisible(true);    
-        monthlabel.setVisible(true);
-        monthfield.setVisible(true);
+        
 jButton1.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -348,8 +332,6 @@ jButton1.setVisible(true);// TODO add your handling code here:
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton menu;
-    private javax.swing.JComboBox<String> monthfield;
-    private javax.swing.JLabel monthlabel;
     private javax.swing.JTextField price;
     private javax.swing.JLabel pricelabel;
     private javax.swing.JLabel prlabel;
