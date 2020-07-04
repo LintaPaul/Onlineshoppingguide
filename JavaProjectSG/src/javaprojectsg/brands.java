@@ -11,10 +11,14 @@ import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -39,10 +43,7 @@ public class brands extends javax.swing.JFrame {
         catch(Exception ex){
             System.out.println(ex.getMessage());
         }
-        Toolkit toolkit = getToolkit();
-        Dimension size = toolkit.getScreenSize();
-        setLocation(size.width/2 - getWidth()/2, 
-        size.height/2 - getHeight()/2);
+        
         return con;
     }
 
@@ -86,15 +87,7 @@ public class brands extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {}
+
             },
             new String [] {
 
@@ -102,6 +95,11 @@ public class brands extends javax.swing.JFrame {
         ));
         jTable1.setIntercellSpacing(new java.awt.Dimension(5, 5));
         jTable1.setRowHeight(35);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -251,65 +249,22 @@ public class brands extends javax.swing.JFrame {
         
     }//GEN-LAST:event_searchCatActionPerformed
 public void findBrands(){
-ArrayList<Product> prds=listproducts(searchCat.getText());
+ArrayList<rating> prds=listproducts(searchCat.getText());
 DefaultTableModel model=new DefaultTableModel();
-model.setColumnIdentifiers(new Object[]{"(According to a popular survey)"});
+model.setColumnIdentifiers(new Object[]{"Brand","Rating"});
 ppb.setText("Popular Brands in "+searchCat.getText());
 searchCat.setText("");
-Object[] row=new Object[1];
+Object[] row=new Object[2];
 for(int i=0;i<prds.size(); i++){
     row[0]=prds.get(i).getBrand();
+    row[1]=prds.get(i).getrtng();
    
     model.addRow(row);
     jTable1.setModel(model);
 }
-    /* Statement st;
-        ResultSet rs;
-        ArrayList<String> productsList=new ArrayList<String> ();
-    try{
-            Connection con= getConnection();
-            st=con.createStatement();
-            String query="select brname from Brands where category='"+prds+"'&& (rtng>=4);";
-            
-            rs=st.executeQuery(query);
-            String pr;
-            if(rs.next()==false)
-            {
-                JOptionPane.showMessageDialog(null,"Brand not available");
-            }
-             while(rs.next()){
-                 int i=0;
-                pr=rs.getString("brname");
-                
-             productsList.add(pr);
-             System.out.println(productsList.get(i));
-                   
-            }
-             
-             
-        }
-        catch(Exception ex){
-             System.out.println(ex.getMessage());
-        }
-    
-       displayBrands(productsList);
-    
-   */ 
+ 
 }
-/*public void displayBrands(ArrayList<String>productList){
-    int i;
-    String a=" ";
-   for(i=0;i<productList.size();i++){
-      
-       a = a +"\n"+ productList.get(i);
-       System.out.println(a);
-      
-      brandList.setText(a); 
-   }
-    
-  
-    
-}*/
+
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
@@ -336,6 +291,57 @@ for(int i=0;i<prds.size(); i++){
                 // TODO add your handling code here:
                
     }//GEN-LAST:event_nextActionPerformed
+public void prsearch(String s){
+    int result = JOptionPane.showConfirmDialog(this,"Search for Product in this brand?", "Brands",
+               JOptionPane.YES_NO_OPTION,
+               JOptionPane.QUESTION_MESSAGE);
+                        if(result == JOptionPane.YES_OPTION){
+                            System.out.println("r0");
+                            try{
+                                Connection con=getConnection();
+                                Statement myStatement=con.createStatement();
+                                System.out.println("r1");
+                                String q="select prname from products where brdname='"+s+"'";
+                                System.out.println(q);
+                                ResultSet rs=myStatement.executeQuery(q);
+                                System.out.println("r2");
+                                if(rs.next()==true){
+                                    System.out.println("r3");
+                                    System.out.println(rs.getString("prname"));
+                                     this.dispose();
+                                    Productsearch p=new Productsearch(rs.getString("prname"),s);
+                                    p.setVisible(true);
+                                  
+                                   
+                                }else{
+                                     System.out.println(rs.getString("prname"));
+                                }
+                                
+                            } catch (SQLException ex) {
+                    Logger.getLogger(brands.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                        }
+
+            
+}
+    
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        JTable source = (JTable)evt.getSource();
+        int row = source.rowAtPoint( evt.getPoint() );
+        int column = source.columnAtPoint( evt.getPoint() );
+System.out.println(row);
+System.out.println(column);
+if(column==1){
+            String s=source.getModel().getValueAt(row,0)+"";
+              prsearch(s); 
+}
+if(column!=1){
+                String s1=source.getModel().getValueAt(row, 0)+"";
+          
+                    prsearch(s1); 
+    } 
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -389,17 +395,17 @@ for(int i=0;i<prds.size(); i++){
     private javax.swing.JTextField searchCat;
     // End of variables declaration//GEN-END:variables
 
-    private ArrayList<Product> listproducts(String text) {
-        ArrayList<Product> productsList=new ArrayList<Product> ();
+    private ArrayList<rating> listproducts(String text) {
+        ArrayList<rating> productsList=new ArrayList<rating> ();
         Statement st;
         ResultSet rs;
         try{
             Connection con= getConnection();
             st=con.createStatement();
-            String query="select brname from brands where category='"+text+"'&&rtng>=4";
+            String query="select brname,rtng from brands where category='"+text+"'&&rtng>=4";
             
             rs=st.executeQuery(query);
-            Product pr;
+            rating pr;
             if(rs.next()==false)
             {
                 JOptionPane.showMessageDialog(null,"Category or brand not available");
@@ -408,8 +414,9 @@ for(int i=0;i<prds.size(); i++){
           do {
                 
               
-                pr=new Product(
-                                String.valueOf(rs.getString("brname")));
+                pr=new rating(
+                                String.valueOf(rs.getString("brname")),
+                (rs.getDouble("rtng")));
                 
                 productsList.add(pr);
                
