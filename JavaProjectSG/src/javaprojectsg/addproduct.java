@@ -188,7 +188,7 @@ public class addproduct extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("check balance before purchase-->");
+        jButton4.setText("check wallet balance for next purchase-->");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
