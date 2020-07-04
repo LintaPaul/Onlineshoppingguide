@@ -50,6 +50,8 @@ public class budget extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         pn = new javax.swing.JTextField();
         check = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        details = new javax.swing.JTextArea();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 10));
 
@@ -129,6 +131,10 @@ public class budget extends javax.swing.JFrame {
             }
         });
 
+        details.setColumns(20);
+        details.setRows(5);
+        jScrollPane1.setViewportView(details);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -140,15 +146,18 @@ public class budget extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jButton2))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addComponent(jLabel4)
-                        .addGap(39, 39, 39)
-                        .addComponent(pn, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(216, 216, 216)
+                        .addComponent(check, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 263, Short.MAX_VALUE)
-                .addComponent(check, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(251, 251, 251))
+                .addGap(0, 70, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(32, 32, 32)
+                        .addComponent(pn, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(65, 65, 65))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,13 +166,15 @@ public class budget extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(77, 77, 77)
+                .addGap(32, 32, 32)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(52, 52, 52)
-                .addComponent(check, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
+                    .addComponent(jLabel4)
+                    .addComponent(pn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addComponent(check)
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -225,22 +236,56 @@ public class budget extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void checkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkActionPerformed
-                Double bd,mr;
+                Double bd,mr,f,a;String br;Double total=0.0;
+                String msg;
                  
                 try {
             Connection con=getConnection();
             
             Statement st=con.createStatement();
-            String query="SELECT budget,mrp from users,products where (username='"+us+"' and prname='"+pn.getText()+"')";
+            
+            
+                    String q2="SELECT price from purchase where username='"+us+"'";
+                    ResultSet rst= st.executeQuery(q2);
+                    while(rst.next()){
+                        mr=rst.getDouble("price");
+                        total+=mr;
+                    }
+            String query="SELECT budget,flipkart,amazon,brdname from users,products where username='"+us+"' and prname='"+pn.getText()+"'";
             ResultSet pst= st.executeQuery(query);
             while(pst.next()){
+                
                 bd=pst.getDouble("budget");
-                mr=pst.getDouble("mrp");
-                if(bd<mr)
-                JOptionPane.showMessageDialog(null,"Price is above your budget");
-                else
-                   JOptionPane.showMessageDialog(null,"Price is within your budget"); 
-            }}
+                f=pst.getDouble("flipkart");
+                a=pst.getDouble("amazon");
+                br=pst.getString("brdname");
+                details.append("\nBudget was "+bd+"\n");
+                details.append("You've already spent "+total+"\n");
+                details.append("Available balance"+(bd-total)+"\n");
+                if(f<a){
+                if((bd-total)>f){
+                    msg="You can buy "+pn.getText()+" of "+br+" from flipkart at "+ f +"\n"+"It is within your budget\n";
+                    JOptionPane.showMessageDialog(null,msg);
+                }
+                else{
+                    msg="You cannot buy "+pn.getText()+" of "+br+" it's least price is in flipkart \n"+" and it is above your budget\n";
+                    JOptionPane.showMessageDialog(null,msg);
+                }}
+                else{
+                    if((bd-total)>a){
+                     msg="You can buy "+pn.getText()+" of "+br+" from amazon at "+a+"\n"+"It is within your budget\n";
+                    JOptionPane.showMessageDialog(null,msg);   
+                    
+                }
+                else{
+                   msg="You cannot buy "+pn.getText()+" of "+br+" it's least price is in amazon \n"+" and it is above your budget\n";
+                    JOptionPane.showMessageDialog(null,msg); 
+                }
+                
+                }
+                
+            } details.setText(" ");
+                }
             catch(SQLException e){
                 JOptionPane.showMessageDialog(null,e);
             }
@@ -285,6 +330,7 @@ public class budget extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton check;
+    private javax.swing.JTextArea details;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -294,6 +340,7 @@ public class budget extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField pn;
     // End of variables declaration//GEN-END:variables
 }
