@@ -11,20 +11,26 @@ package javaprojectsg;
  */
 class Product {
     private String name,category,brand,avs;
-    private Double mrp;
-    public Product(String Name,String Category,String Brand,Double Mrp,String Avs){
+    private double mrp,fp,amz;
+    public Product(String Name,String Category,String Brand,double Mrp,String Avs){
         this.name=Name;
         this.category=Category;
         this.brand=Brand;
         this.mrp=Mrp;
         this.avs=Avs;
         
-        
     }
+     Product(String brand, double fp,double am) {
+       this.brand=brand;
+        this.fp=fp;
+        this.amz=am;
+        //To change body of generated methods, choose Tools | Templates.
+    }
+     Product(String b){
+         this.brand=b;
+     }
+    
 
-    Product(String brand) {
-        this.brand = brand; //To change body of generated methods, choose Tools | Templates.
-    }
     
     public String getName(){
         return name;
@@ -38,12 +44,17 @@ class Product {
     public Double getMrp(){
         return mrp;
     }
-    /*
+    public Double getFp(){
+        return fp;
+    }
     public Double getAm(){
         return amz;
-    }*/
+    }
     public String getsite(){
         return avs;
+       
     }
+
+   
     
 }
