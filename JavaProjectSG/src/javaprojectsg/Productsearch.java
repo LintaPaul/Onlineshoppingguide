@@ -7,15 +7,12 @@ package javaprojectsg;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
-import java.io.*;
-import java.math.BigInteger;
-import java.sql.PreparedStatement;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -78,8 +75,6 @@ public class Productsearch extends javax.swing.JFrame {
             row[1] = prds.get(i).getCategory();
             row[2] = prds.get(i).getBrand();
             row[3] = prds.get(i).getMrp();
-            /* row[4]=prds.get(i).getFp();
-            row[5]=prds.get(i).getAm();*/
             row[4] = prds.get(i).getsite();
             model.addRow(row);
         }
@@ -144,12 +139,62 @@ public class Productsearch extends javax.swing.JFrame {
             row[1] = prds.get(i).getCategory();
             row[2] = prds.get(i).getBrand();
             row[3] = prds.get(i).getMrp();
-            /* row[4]=prds.get(i).getFp();
-            row[5]=prds.get(i).getAm();*/
             row[4] = prds.get(i).getsite();
             model.addRow(row);
         }
         jTable1.setModel(model);
+    }
+    public ArrayList<Fdb> listfdbs(String ValtoSearch) {
+        ArrayList<Fdb> fdbsList = new ArrayList<Fdb>();
+
+        Statement st;
+
+        try {
+            Connection con = getConnection();
+            st = con.createStatement();
+            String query = "select uname,brname,fdbk,prrtng from feedbacks where pname='" + ValtoSearch + "'";
+
+            ResultSet rs = st.executeQuery(query);
+            Fdb fd;
+
+            if (!rs.next()) {
+                JOptionPane.showMessageDialog(null, "sorry, feedbacks unavailable");
+            }
+
+            do{
+                fd = new Fdb(
+                        rs.getString("uname"),
+                        rs.getString("brname"),
+                        rs.getString("fdbk"),
+                        rs.getDouble("prrtng"));
+                       
+                fdbsList.add(fd);
+        
+                
+            }while (rs.next()) ;
+        } catch (SQLException ex) {
+
+            System.out.println(ex.getMessage());
+        }
+        
+        return fdbsList;
+
+    }
+
+    public void findfeedbacks() {
+        ArrayList<Fdb> fds = listfdbs(jTextField1.getText());
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(new Object[]{"Customer name","Brand", "Feedback", "Their rating"});
+        Object[] row = new Object[4];
+        for (int i = 0; i < fds.size(); i++) {
+            row[0] = fds.get(i).getName();
+            row[1] = fds.get(i).getBrand();
+            row[2] = fds.get(i).getFeed();
+            row[3] = fds.get(i).getrtng();
+            
+            model.addRow(row);
+        }
+        jTable2.setModel(model);
     }
 
     /**
@@ -172,6 +217,9 @@ public class Productsearch extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         home = new javax.swing.JButton();
         compareprice = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -263,6 +311,32 @@ public class Productsearch extends javax.swing.JFrame {
             }
         });
 
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Customer name", "Brand", "Feedback", "Their rating"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable2);
+
+        jLabel3.setText("Customer feedbacks:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -278,17 +352,19 @@ public class Productsearch extends javax.swing.JFrame {
                 .addGap(137, 137, 137)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(183, 183, 183)
+                        .addComponent(search)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(search)
-                        .addGap(336, 336, 336))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 725, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26))))
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -303,11 +379,15 @@ public class Productsearch extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(search)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addGap(13, 13, 13)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(125, 125, 125))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -315,7 +395,7 @@ public class Productsearch extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(47, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46))
         );
@@ -337,16 +417,16 @@ public class Productsearch extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 4, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-String a=jTextField1.getText();
+        String a=jTextField1.getText();
         findProducts(a);
-
+        findfeedbacks();
         // TODO add your handling code here:
     }//GEN-LAST:event_searchActionPerformed
 
@@ -404,10 +484,13 @@ String a=jTextField1.getText();
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JButton search;
     // End of variables declaration//GEN-END:variables
