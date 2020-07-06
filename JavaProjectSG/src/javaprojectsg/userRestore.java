@@ -31,7 +31,7 @@ public class userRestore {
                
                
                  
-                System.out.println("created statae");
+                System.out.println("created state");
                String query = "select userid from users where loginStatus=1";
                ResultSet myResultSet=myStatement.executeQuery(query);
                System.out.println("Query ex");

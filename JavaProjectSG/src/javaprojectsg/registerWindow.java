@@ -290,8 +290,7 @@ public class registerWindow extends javax.swing.JFrame {
                 ps.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Registered successfully");
                 
-                System.out.println("Name :  "+ username.getText());
-                System.out.println("Name :  "+ password.getText());
+                
                 cancel();
                 }
                 else{
