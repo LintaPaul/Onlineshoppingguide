@@ -62,17 +62,17 @@ public class loginWindow extends javax.swing.JFrame {
 	        String query;
                 query = "select username,passwords from users where username='"+username.getText()+"' and passwords='"+password.getText()+"'";
                 String query1= "UPDATE users  SET      loginStatus = 1 WHERE     username = '"+username.getText()+"'"; 
-ResultSet myResultSet=myStatement.executeQuery(query);
-           if(myResultSet.next()==true){
-            myStatement1.executeUpdate(query1);
+                ResultSet myResultSet=myStatement.executeQuery(query);
+               if(myResultSet.next()==true){
+                     myStatement1.executeUpdate(query1);
             
              
                        JOptionPane.showMessageDialog(null, "Login successful");
                        myResultSet.close();
-      myStatement.close();
-      con.close();
-       myResultSet.close();
-      myStatement1.close();
+                       myStatement.close();
+                       con.close();
+                       myResultSet.close();
+                       myStatement1.close();
       con1.close();
                       
                        return true;

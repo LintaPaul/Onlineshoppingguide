@@ -302,12 +302,12 @@ public void prsearch(String s){
                                 Statement myStatement=con.createStatement();
                                 System.out.println("r1");
                                 String q="select prname from products where brdname='"+s+"'";
-                                System.out.println(q);
+                              
                                 ResultSet rs=myStatement.executeQuery(q);
-                                System.out.println("r2");
+                                
                                 if(rs.next()==true){
-                                    System.out.println("r3");
-                                    System.out.println(rs.getString("prname"));
+                                    
+                                    
                                      this.dispose();
                                     Productsearch p=new Productsearch(rs.getString("prname"),s);
                                     p.setVisible(true);
@@ -330,8 +330,7 @@ public void prsearch(String s){
         JTable source = (JTable)evt.getSource();
         int row = source.rowAtPoint( evt.getPoint() );
         int column = source.columnAtPoint( evt.getPoint() );
-System.out.println(row);
-System.out.println(column);
+
 if(column==1){
             String s=source.getModel().getValueAt(row,0)+"";
               prsearch(s); 
