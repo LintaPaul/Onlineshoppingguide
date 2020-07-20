@@ -74,7 +74,7 @@ public class loginWindow extends javax.swing.JFrame {
                        con.close();
                        myResultSet.close();
                        myStatement1.close();
-      con1.close();
+                       con1.close();
                       
                        return true;
            }    
